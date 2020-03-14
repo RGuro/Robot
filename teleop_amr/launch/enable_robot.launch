@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <node pkg="teleop_amr" type="robot_hadware.py" name="robot_hadware" output="screen"/>
+
+    <node pkg="teleop_amr" type="Sensor_odom_publisher.py" name="Sensor_odom_publisher" output="screen"/>
+
+    <node pkg="teleop_amr" type="sensor_imu_publisher.py" name="sensor_imu_publisher" output="screen">
+        <param name="rate" type="int" value="80" />
+        <rosparam param="publish_transform">True</rosparam>
+        <rosparam param="static_transform">[0.0, 0.0, 0.5, 0.0, 0.0, 180]</rosparam>
+        <param name="serial_port" type="string" value="/dev/ttyUSB0" />
+        <param name="topic_name" type="string" value="/imu" />
+        <param name="fixed_frame" type="string" value="base_link" />
+        <param name="frame_name" type="string" value="imu_frame" />
+    </node>
+	 
+    
+    <node pkg="tf" type="static_transform_publisher" name="map_to_odom" 
+          args="0 0 0 0 0 0 1 map odom 100" />   
+     
+    <node pkg="tf" type="static_transform_publisher" name="base_footprint_to_base_link" 
+          args="0 0 0.7 0 0 0 1 base_footprint base_link 100" />
+    
+    <node pkg="tf" type="static_transform_publisher" name="base_to_laser" 
+          args="0.202 0 0.111 0 0 0 1 base_link laser_frame 100" />
+    
+    <include file="/home/jetsonxavier/catkin_ws_robot/src/RPLidar_Hector_SLAM/rplidar_ros/launch/rplidar.launch"/>
+
+    <!--<include file="/home/jetsonxavier/catkin_ws_robot/src/RPLidar_Hector_SLAM/hector_slam/hector_slam_launch/launch/tutorial.launch"/>-->
+ 
+</launch>
