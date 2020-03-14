@@ -10,7 +10,6 @@
         <param name="rate" type="int" value="80" />
         <rosparam param="publish_transform">True</rosparam>
         <rosparam param="static_transform">[0.0, 0.0, 0.5, 0.0, 0.0, 180]</rosparam>
-        <param name="serial_port" type="string" value="/dev/ttyUSB0" />
         <param name="topic_name" type="string" value="/imu" />
         <param name="fixed_frame" type="string" value="base_link" />
         <param name="frame_name" type="string" value="imu_frame" />
