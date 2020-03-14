@@ -26,8 +26,8 @@
     <node pkg="tf" type="static_transform_publisher" name="base_to_laser" 
           args="0.202 0 0.111 0 0 0 1 base_link laser_frame 100" />
     
-    <include file="/home/jetsonxavier/catkin_ws_robot/src/RPLidar_Hector_SLAM/rplidar_ros/launch/rplidar.launch"/>
-
-    <!--<include file="/home/jetsonxavier/catkin_ws_robot/src/RPLidar_Hector_SLAM/hector_slam/hector_slam_launch/launch/tutorial.launch"/>-->
+     <include file="$(find rplidar_ros)/launch/rplidar.launch"/>
+   
+     <!--<include file="$(find hector_slam_launch)/launch/tutorial.launch"/>-->
  
 </launch>
