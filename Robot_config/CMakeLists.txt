@@ -10,6 +10,8 @@ project(Robot_config)
 find_package(catkin REQUIRED COMPONENTS
   map_server
   move_base
+  teb_local_planner
+  amcl
 )
 
 ## System dependencies are found with CMake's conventions
