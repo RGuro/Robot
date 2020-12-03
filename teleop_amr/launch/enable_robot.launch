@@ -1,32 +1,51 @@
-<?xml version="1.0"?>
-
 <launch>
+   
+<!-- ***********         Connect to Robot     *************  -->
 
+    <include file="$(find rosserial_python)/launch/robot_connect.launch"/>
+
+
+<!-- ***********         Scripts     *************  -->
     <node pkg="teleop_amr" type="robot_hadware.py" name="robot_hadware" output="screen"/>
 
-    <node pkg="teleop_amr" type="Sensor_odom_publisher.py" name="Sensor_odom_publisher" output="screen"/>
+    <node pkg="teleop_amr" type="teleop_amr.py" name="teleop_amr" output="screen"/>
+
+    <node pkg="teleop_amr" type="Sensor_odom_publisher.py" name="Sensor_odom_publisher" output="screen"/> 
+        <param name="rate" type="int" value="10" />
+	<param name="ticks_meter" type="string" value="255" />
+        <param name="base_width" type="string" value="0.630" />
+        <param name="base_frame_id" type="string" value="base_footprint" />
+	<param name="odom_frame_id" type="string" value="odom" /> 
 
     <node pkg="teleop_amr" type="sensor_imu_publisher.py" name="sensor_imu_publisher" output="screen">
         <param name="rate" type="int" value="80" />
         <rosparam param="publish_transform">True</rosparam>
-        <rosparam param="static_transform">[0.0, 0.0, 0.5, 0.0, 0.0, 180]</rosparam>
+        <rosparam param="static_transform">[0.03, 0.0, 0.163, 0.0, 0.0, 180]</rosparam>
         <param name="topic_name" type="string" value="/imu" />
         <param name="fixed_frame" type="string" value="base_link" />
         <param name="frame_name" type="string" value="imu_frame" />
     </node>
-	 
+
+    <include file="$(find rplidar_ros)/launch/rplidar.launch"/>
+
+ 
+<!-- ***********          MAP     *************  -->
+    <!--<node name="map_server" pkg="map_server" type="map_server" args="$(find Robot_config)/maps/test1.yaml" />
+	<param name="frame_id" value="map" /> -->
+
+
+<!-- ***********         Transforms     *************  -->	 
     
     <node pkg="tf" type="static_transform_publisher" name="map_to_odom" 
           args="0 0 0 0 0 0 1 map odom 100" />   
      
     <node pkg="tf" type="static_transform_publisher" name="base_footprint_to_base_link" 
-          args="0 0 0.7 0 0 0 1 base_footprint base_link 100" />
-    
+          args="0 0 0.06757 0 0 0 1 base_footprint base_link 100" />
+
     <node pkg="tf" type="static_transform_publisher" name="base_to_laser" 
-          args="0.202 0 0.111 0 0 0 1 base_link laser_frame 100" />
-    
-     <include file="$(find rplidar_ros)/launch/rplidar.launch"/>
+          args="0.28976 0 0.3 0 0 0 1 base_link laser_frame 100" />    
+
    
-     <!--<include file="$(find hector_slam_launch)/launch/tutorial.launch"/>-->
+<!--<include file="$(find hector_slam_launch)/launch/tutorial.launch"/>-->
  
 </launch>
