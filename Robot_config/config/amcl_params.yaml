@@ -1,11 +1,7 @@
-use_map_topic: true
-
-odom_frame_id: "odom"
-base_frame_id: "base_footprint"
-global_frame_id: "map"
+use_map_topic: false
+tf_broadcast: false
 
 ## Publish scans from best pose at a max of 10 Hz
-odom_model_type: "diff"
 odom_alpha5: 0.1
 gui_publish_rate: 10.0
 laser_max_beams: 60
@@ -34,5 +30,5 @@ resample_interval: 1
 
 ## Increase tolerance because the computer can get quite busy 
 transform_tolerance: 1.0
-recovery_alpha_slow: 0.001
-recovery_alpha_fast: 0.1
+recovery_alpha_slow: 0.0
+recovery_alpha_fast: 0.0
